@@ -77,18 +77,14 @@ def getSwitch(allSwitches, switchId) {
 def getSwitches(allSwitches) {
 	def resp = []
     allSwitches.each {
-    	log.debug "getSwitches: ${it.supportedAttributes}"
         resp << [
         	id: it.id,
             name: it.displayName,
-            type: it.type,
             features: [
         		power: it.currentValue("switch"),
 	            brightness: it.currentValue('level') != null ? it.currentValue('level') : 'none',
-    	        color: 'none',
                 status: it.currentValue('indicatorStatus') != null ? it.currentValue('indicatorStatus') : 'none',
-        	],
-            events: it.events()
+        	]
 		]
     }
     return resp
